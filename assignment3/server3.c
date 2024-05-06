@@ -148,12 +148,11 @@ void histogram(int client_socket, char *address)
     fclose(image_file);
 
     // Send HTTP header
-    const char *html_header = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n";
-    const char *html_body_start = "<!DOCTYPE html>\n<html>\n<head>\n<title>CS410 Webserver</title>\n<style> body { background-color: white; } h1 { font-size: 16pt; color: red; text-align: center; } img { display: block; margin: 0 auto; }</style>\n</head>\n<body>\n<h1>CS410 Webserver</h1>\n<br>\n<img src=\"/home/daniel/Desktop/assignment3/histogram.jpg\">\n</body>\n</html>";
+    const char *http_header = "HTTP/1.1 200 OK\r\nContent-Type: image/jpeg\r\n\r\n";
+    //const char *html_body_start = "<!DOCTYPE html>\n<html>\n<head>\n<title>CS410 Webserver</title>\n<style> body { background-color: white; } h1 { font-size: 16pt; color: red; text-align: center; } img { display: block; margin: 0 auto; }</style>\n</head>\n<body>\n<h1>CS410 Webserver</h1>\n<br>\n<img src=\"/home/daniel/Desktop/assignment3/histogram.jpg\">\n</body>\n</html>";
 
     // Send the HTML content to the client
-    send(client_socket, html_header, strlen(html_header), 0);
-    send(client_socket, html_body_start, strlen(html_body_start), 0);
+    send(client_socket, http_header, strlen(http_header), 0);
 
     // Send image data
     send(client_socket, image_buffer, image_size, 0);
